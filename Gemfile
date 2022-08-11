@@ -8,6 +8,7 @@ ruby '3.0.2'
 gem 'minitest-power_assert'
 gem 'rollbar'
 gem 'rubocop-rails', require: false
+gem 'slim_lint'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.4'

@@ -4,3 +4,5 @@ AllCops:
   Exclude:
     - 'bin/*'
     - 'config/environment.rb'
+    - 'config/environments/*'
+    - 'config/initializers/*'

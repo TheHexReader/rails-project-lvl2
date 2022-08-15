@@ -6,3 +6,4 @@ AllCops:
     - 'config/environment.rb'
     - 'config/environments/*'
     - 'config/initializers/*'
+    - 'node_modules/**/*'

@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>CollectiveBlog</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -11,6 +11,11 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <%= render 'shared/layouts/header' %>
+    </header>
+    <main>
+      <%= yield %>
+    </main>
   </body>
 </html>

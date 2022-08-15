@@ -7,4 +7,3 @@ AllCops:
     - 'config/environments/*'
     - 'config/initializers/*'
     - 'node_modules/**/*'
-    - 'app/views/**/*'

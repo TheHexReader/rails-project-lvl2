@@ -1,6 +1,8 @@
 .nav.nav-pills.mb-3.justify-content-center
   h3
-    | Current user: #{current_user.nil? ? 'No user logged in' : current_user['email']}
-  p
-    = current_user.nil? ? (link_to 'Sign in', new_user_session_path) : (link_to 'Sign out', destroy_user_session_path, :method => :delete)
-
+    | Current user: #{current_user.nil? ?
+    'No user logged in' : current_user['email']}
+  h1
+    | #{current_user.nil? ?
+    link_to 'Sign in', new_user_session_path :
+    link_to 'Sign out', destroy_user_session_path, :method => :delete}

@@ -10,4 +10,5 @@ jobs:
         with:
           ruby-version: '3.0.2'
       - run: bundle install
+      - run: yarn install
       - run: make run_test

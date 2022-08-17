@@ -9,6 +9,7 @@ gem 'devise'
 gem 'minitest-power_assert'
 gem 'rollbar'
 gem 'rubocop-rails', require: false
+gem 'simple_form'
 gem 'slim_lint'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'

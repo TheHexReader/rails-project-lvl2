@@ -1,1 +1,28 @@
 @import "~bootstrap/scss/bootstrap";
+
+main {
+    margin-top: 56px;
+}
+
+.card-content {
+    h1 {
+        margin: auto;
+        padding: 10px;
+    }
+    form {
+        padding: 25px;
+        div {
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            label {
+                font-size: 20px;
+                padding-right: 20px;
+            }
+        }
+        input.btn {
+            margin-left: 40%;
+        }
+    }
+}

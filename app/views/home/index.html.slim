@@ -1,8 +1,7 @@
 .nav.nav-pills.mb-3.justify-content-center
-  h3
-    | Current user: #{@current_user_email}
-  p
-    - if current_user.nil?
-      = link_to 'Sign in', new_user_session_path
-    - else
-      = link_to 'Sign out', destroy_user_session_path, method: :delete
+  - if @posts.empty?
+    h3
+      | Постов нет :(
+  - else
+    - @posts.each do |post|
+      = render 'posts/post', post: post

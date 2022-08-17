@@ -1,0 +1,23 @@
+.justify-content-center
+  h1
+    | #{@user['email']}
+  - if @user == current_user
+    = link_to 'Создать пост', new_post_path, class: 'btn btn-primary text-decoration-none'
+
+table.table.table-striped.table-hover.mb-5
+  thead
+    tr
+      th{ scope: :col } = 'Название'
+      th{ scope: :col } = 'Текст'
+      th
+
+  tbody
+    - @posts.each do |post|
+      tr
+        td = post.title
+        td = post.body
+        td.d-flex
+          .me-4 = link_to 'Показать', post
+          - if @user == current_user
+            .me-4 = link_to 'Редактировать', edit_post_path(post)
+            = link_to 'Удалить', post, data: { confirm: 'Уверенны?' }, method: :delete

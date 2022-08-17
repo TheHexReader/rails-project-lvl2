@@ -1,0 +1,14 @@
+.container
+  .row.p-1
+    .col.md-12
+      .card.mb-3
+        .card-body
+          h2
+            = link_to post['title'], post, class: 'text-decoration-none text-black'
+          .card-text.mb-2
+            | #{post['body']}
+          .text-right.small.text-muted.mt-auto
+            span.me-2
+              | Категория: #{Category.find_by(id: post['creator'])['name']}
+            span.me-2
+              | Автор: #{User.find_by(id: post['creator'])['email']}

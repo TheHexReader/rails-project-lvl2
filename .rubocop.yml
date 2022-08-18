@@ -7,3 +7,4 @@ AllCops:
     - 'config/environments/*'
     - 'config/initializers/*'
     - 'node_modules/**/*'
+    - 'db/schema.rb'

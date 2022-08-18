@@ -3,10 +3,22 @@
 h1
   | Коментарии
 
-- @comments.each do | comment |
+= simple_form_for '', url: comments_path do |f|
+  = f.error_notification
+  = f.input :comments, label: 'Ваш коментарий:'
+  = button_tag :Submit, type: 'submit', class: 'btn btn-success', name: 'posts_id', value: @post['id']
+
+- @comments.each do |comment|
   .card.mb-4
     .card-header.small.mb-2.d-flex
-      = User.find_by(id: comment['creator'].to_i)
-    .card-body.d-flex
-      = comment['comments']
-    .mb-2.m-4
+      = User.find_by(id: comment['creator'])['email']
+    .card-body.flex-column
+      .w-100
+        .mb-3
+          = comment['comments']
+      - if comment.has_children?
+        = render 'comments/children_comments', comments: comment.child_ids
+      hr.my-2
+      - if comment['creator'].to_s == (current_user.nil? ? '' : current_user['id'].to_s)
+        = link_to 'Удалить', comment_path(comment, posts_id: @post['id']), method: :delete, class: 'btn btn-danger'
+        = link_to 'Ответить', { controller: 'comments', action: 'new', posts_id: @post['id'], comment_id: comment['id'] }, class: 'btn btn-primary'

@@ -1,0 +1,15 @@
+- comments.each do |comment|
+    .small
+      hr.my-2
+        .flex-column
+          .mr-auto
+            span.me-1
+              = User.find_by(id: PostComment.find_by(id: comment)['creator'])['email']
+            p.mr-2
+              = PostComment.find_by(id: comment)['comments']
+            - if PostComment.find_by(id: comment)['creator'].to_s == (current_user.nil? ? '' : current_user['id'].to_s)
+              = link_to 'Удалить', comment_path(PostComment.find_by(id: comment), posts_id: @post['id']), method: :delete, class: 'btn btn-danger'
+              = link_to 'Ответить', { controller: 'comments', action: 'new', posts_id: @post['id'], comment_id: PostComment.find_by(id: comment)['id'] }, class: 'btn btn-primary'
+            - if PostComment.find_by(id: comment).has_children?
+              = render 'comments/children_comments', comments: PostComment.find_by(id: comment).child_ids
+              .child_ids

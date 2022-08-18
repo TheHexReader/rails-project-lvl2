@@ -38,7 +38,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     post posts_path, params: { post: attrs }
 
     assert_redirected_to post_path(Post.find_by(attrs)['id'])
-    assert_select 'a', text: attrs['title']
+    assert_select '*', text: attrs['title']
   end
 
   test 'test edit' do

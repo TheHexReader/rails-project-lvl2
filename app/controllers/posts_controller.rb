@@ -4,7 +4,7 @@
 class PostsController < ApplicationController
   def show
     @post = Post.find_by(id: params[:id])
-    @comments = PostComment.where(posts_id: @post['id'].to_i)
+    @comments = PostComment.where(posts_id: @post['id'].to_i, ancestry: nil)
   end
 
   def create

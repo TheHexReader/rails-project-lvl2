@@ -1,0 +1,6 @@
+= simple_form_for '', url: comments_path do |f|
+  = f.error_notification
+  = f.input :posts_id, as: :hidden, input_html: { value: params['posts_id'] }
+  = f.input :comment_id, as: :hidden, input_html: { value: params['comment_id'] }
+  = f.input :comments, label: 'Коментарий'
+  = f.submit class: 'btn btn-success'

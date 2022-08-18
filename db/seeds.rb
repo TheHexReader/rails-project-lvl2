@@ -9,5 +9,5 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 5.times do |i|
-  Category.create!(name: "Category ##{i+1}")
+  Category.create!(name: "Category ##{i + 1}")
 end

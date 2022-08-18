@@ -4,6 +4,8 @@
 class PostsController < ApplicationController
   def show
     @post = Post.find_by(id: params[:id])
+    return if @post.nil?
+
     @comments = PostComment.where(post: @post['id'].to_i, ancestry: nil)
     @like_counter = if PostLike.find_by(post_id: params['id']).nil?
                       PostLike.create!(counter: 0, post_id: @post['id'])

@@ -11,4 +11,6 @@ class LikesController < ApplicationController
       redirect_to post_path(@like_counter['post_id']), status: :unprocessable_entity
     end
   end
+
+  def post_like_path; end
 end

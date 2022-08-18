@@ -40,10 +40,9 @@ ActiveRecord::Schema.define(version: 2022_08_18_123545) do
     t.string "title"
     t.text "body"
     t.string "creator"
-    t.integer "categories_id"
+    t.string "category"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["categories_id"], name: "index_posts_on_categories_id"
   end
 
   create_table "users", force: :cascade do |t|

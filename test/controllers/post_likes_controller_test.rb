@@ -16,7 +16,7 @@ class PostLikesControllerTest < ActionDispatch::IntegrationTest
     post_likes_one = post_likes(:one)
     patch like_path(post_likes_one)
 
-    assert_redirected_to post_path(post_likes_one['posts_id'])
+    assert_redirected_to post_path(post_likes_one['post_id'])
     assert PostLike.find_by(id: post_likes_one['id'])['counter'] == post_likes_one['counter'] + 1
   end
 end

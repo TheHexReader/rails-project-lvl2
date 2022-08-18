@@ -10,17 +10,17 @@ class CommentsController < ApplicationController
     @comment = PostComment.new(comment_params.merge(process_params(params)))
 
     if @comment.save
-      redirect_to post_path(params['posts_id']), notice: 'success'
+      redirect_to post_path(params['post']), notice: 'success'
     else
-      redirect_to post_path(params['posts_id']), status: :unprocessable_entity
+      redirect_to post_path(params['post']), status: :unprocessable_entity
     end
   end
 
   def destroy
     @comment = PostComment.find(params[:id])
-    if current_user['id'].to_s == @comment['creator'].to_s
+    if current_user['id'].to_s == @comment['user'].to_s
       @comment.destroy
-      redirect_to post_path(params['posts_id']), notice: 'success'
+      redirect_to post_path(params['post'].to_i), notice: 'success'
     else
       redirect_to root_path, status: :unauthorized
     end
@@ -29,12 +29,12 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.permit(:comments, :creator, :posts_id)
+    params.permit(:content, :user, :post)
   end
 
   def process_params(params)
     {
-      creator: current_user['id'],
+      user: current_user['id'],
       parent: params['comment_id'].nil? ? nil : PostComment.find_by(id: params['comment_id'])
     }
   end

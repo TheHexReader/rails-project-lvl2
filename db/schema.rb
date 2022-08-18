@@ -19,14 +19,13 @@ ActiveRecord::Schema.define(version: 2022_08_18_123545) do
   end
 
   create_table "post_comments", force: :cascade do |t|
-    t.text "comments"
-    t.string "creator"
-    t.integer "posts_id"
+    t.text "content"
+    t.string "user"
+    t.string "post"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "ancestry"
     t.index ["ancestry"], name: "index_post_comments_on_ancestry"
-    t.index ["posts_id"], name: "index_post_comments_on_posts_id"
   end
 
   create_table "post_likes", force: :cascade do |t|

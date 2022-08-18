@@ -1,5 +1,5 @@
 one:
   id: 1
-  comments: Some comments for this comment
-  creator: '1'
-  posts_id: 1
+  content: Some comments for this comment
+  user: '1'
+  post: 1

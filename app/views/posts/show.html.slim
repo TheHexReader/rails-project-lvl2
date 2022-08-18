@@ -12,16 +12,16 @@ h1
 = simple_form_for '', url: comments_path do |f|
   = f.error_notification
   = f.input :comments, label: 'Ваш коментарий:'
-  = button_tag :Submit, type: 'submit', class: 'btn btn-success', name: 'posts_id', value: @post['id']
+  = button_tag :Submit, type: 'submit', class: 'btn btn-success', name: 'post', value: @post['id']
 
 - @comments.each do |comment|
   .card.mb-4
     .card-header.small.mb-2.d-flex
-      = User.find_by(id: comment['creator'])['email']
+      = User.find_by(id: comment['user'])['email']
     .card-body.flex-column
       .w-100
         .mb-3
-          = comment['comments']
+          = comment['content']
       - if comment.has_children?
         = render 'comments/children_comments', comments: comment.child_ids
       hr.my-2

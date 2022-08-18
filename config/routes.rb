@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   resources :users, only: %w[show]
   resources :posts, only: %w[new create show edit update destroy]
   resources :comments, only: %w[create destroy new]
+  resources :likes, only: %w[update]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

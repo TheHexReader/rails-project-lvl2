@@ -5,6 +5,11 @@ class PostsController < ApplicationController
   def show
     @post = Post.find_by(id: params[:id])
     @comments = PostComment.where(posts_id: @post['id'].to_i, ancestry: nil)
+    @like_counter = if PostLike.find_by(posts_id: params['id']).nil?
+                      PostLike.create!(counter: 0, posts_id: @post['id'])
+                    else
+                      PostLike.find_by(posts_id: params['id'])
+                    end
   end
 
   def create

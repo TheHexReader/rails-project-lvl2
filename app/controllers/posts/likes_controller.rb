@@ -13,5 +13,7 @@ module Posts
         redirect_to post_path(@like_counter['post_id']), status: :unprocessable_entity
       end
     end
+
+    def destroy; end
   end
 end

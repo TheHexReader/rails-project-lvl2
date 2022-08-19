@@ -10,5 +10,4 @@ Rails.application.routes.draw do
   resources :comments, only: %w[create destroy new]
 
   patch '/likes/:id', to: 'likes#update', as: 'post_like'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

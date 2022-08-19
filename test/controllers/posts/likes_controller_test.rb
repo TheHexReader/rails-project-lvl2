@@ -2,8 +2,8 @@
 
 require 'test_helper'
 
-# Users controler tests
-class PostLikesControllerTest < ActionDispatch::IntegrationTest
+# Likes controler tests
+class LikesControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
   setup do
@@ -14,7 +14,7 @@ class PostLikesControllerTest < ActionDispatch::IntegrationTest
 
   test 'test update' do
     likes_one = post_likes(:one)
-    patch post_like_path(likes_one)
+    patch post_like_path(likes_one, post_id: likes_one['post_id'])
 
     assert_redirected_to post_path(likes_one['post_id'])
     assert PostLike.find_by(id: likes_one['id'])['counter'] == likes_one['counter'] + 1

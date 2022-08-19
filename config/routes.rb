@@ -6,8 +6,10 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resources :users, only: %w[show]
-  resources :posts, only: %w[new create show edit update destroy]
-  resources :comments, only: %w[create destroy new]
-
-  patch '/likes/:id', to: 'likes#update', as: 'post_like'
+  resources :posts, only: %w[new create show edit update destroy] do
+    scope module: 'posts' do
+      resources :comments, only: %w[create destroy new]
+      resources :likes, only: %w[update]
+    end
+  end
 end

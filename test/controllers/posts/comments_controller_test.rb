@@ -3,15 +3,16 @@
 require 'test_helper'
 
 # Comments controller test
-class CommentsControllerTest < ActionDispatch::IntegrationTest
+class PostCommentsControllerTest < ActionDispatch::IntegrationTest
   setup do
     get new_user_session_path
     sign_in users(:one)
     post user_session_path
+    @post_one = posts(:one)
   end
 
   test 'test new' do
-    get new_comment_path
+    get new_post_comment_path(@post_one)
     assert_select 'h1', text: 'Создать коментарий'
   end
 
@@ -21,7 +22,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
       user: 1,
       post: 1
     }
-    post comments_path, params: attrs
+    post post_comments_path(@post_one), params: attrs
 
     assert_redirected_to post_path(Post.find_by(id: PostComment.find_by(attrs)['post'])['id'])
     assert_select '*', text: attrs['comments']
@@ -30,7 +31,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
   test 'test destroy' do
     comment_one = post_comments(:one)
 
-    delete comment_path(comment_one, posts_id: comment_one['post'])
+    delete post_comment_path(comment_one, post_id: comment_one['post'])
 
     assert PostComment.find_by(id: comment_one[:id]).nil?
   end

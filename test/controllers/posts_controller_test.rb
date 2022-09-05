@@ -32,7 +32,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     attrs = {
       title: 'Some Post',
       body: 'Body of some post',
-      category_id: 1,
+      category: 1,
       creator: 1
     }
     post posts_path, params: { post: attrs }

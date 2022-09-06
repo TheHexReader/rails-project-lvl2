@@ -1,6 +1,6 @@
 = simple_form_for '', url: post_comments_path do |f|
   = f.error_notification
-  = f.input :post, as: :hidden, input_html: {value: params['post_id']}
+  = f.input :post, as: :hidden, input_html: { value: params['post_id'] }
   = f.input :comment_id, as: :hidden, input_html: { value: params['comment_id'] }
   = f.input :content, label: 'Коментарий'
   = f.button :submit, class: 'btn btn-success'

@@ -22,7 +22,7 @@ module Posts
       @comment = PostComment.find(params[:id])
       if current_user['id'].to_s == @comment['user'].to_s
         @comment.destroy
-        redirect_to post_path(params['post'].to_i), notice: 'success'
+        redirect_to post_path(params['post_id']), notice: 'success'
       else
         redirect_to root_path, status: :unauthorized
       end

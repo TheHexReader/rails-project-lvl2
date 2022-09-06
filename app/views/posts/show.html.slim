@@ -24,8 +24,8 @@
           .mb-3
             = comment['content']
         - if comment.has_children?
-          = render 'comments/children_comments', comments: comment.child_ids
+          = render 'posts/comments/children_comments', comments: comment.child_ids
         hr.my-2
         - if comment['user'].to_s == (current_user.nil? ? '' : current_user['id'].to_s)
-          = link_to 'Удалить', post_comment_path(comment, posts_id: @post['id']), method: :delete, class: 'btn btn-danger'
-          = link_to 'Ответить', new_post_comment_path(comment, posts_id: @post['id']), class: 'btn btn-primary'
+          = link_to 'Удалить', post_comment_path(comment, post_id: @post), method: :delete, class: 'btn btn-danger'
+          = link_to 'Ответить', new_post_comment_path(@post, comment_id: comment.id), class: 'btn btn-primary'

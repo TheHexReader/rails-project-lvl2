@@ -8,6 +8,7 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.text :body
       t.string :creator
       t.integer :category_id
+      t.string :category
 
       t.timestamps
     end

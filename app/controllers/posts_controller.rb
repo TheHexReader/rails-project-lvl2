@@ -7,11 +7,7 @@ class PostsController < ApplicationController
     return if @post.nil?
 
     @comments = PostComment.where(post: @post['id'].to_i, ancestry: nil)
-    @like_counter = if PostLike.find_by(post_id: params['id']).nil?
-                      PostLike.create!(counter: 0, post_id: @post['id'])
-                    else
-                      PostLike.find_by(post_id: params['id'])
-                    end
+    @likes = PostLike.where(post: @post)
   end
 
   def create

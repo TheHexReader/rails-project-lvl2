@@ -1,4 +1,4 @@
 one:
   id: 1
-  counter: 0
   post_id: 1
+  user: 1

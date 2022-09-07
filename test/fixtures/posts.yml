@@ -2,5 +2,5 @@ one:
   id: 1
   title: 'Post One'
   body: 'Body of a post one'
-  category_id: 1
+  category: 1
   creator: 1

@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 2022_08_18_123545) do
     t.string "creator"
     t.string "category"
     t.integer "category_id"
+    t.string "likes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

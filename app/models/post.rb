@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
 class Post < ApplicationRecord
-  has_many :post_comments
+  has_many :comments
+  has_many :likes
 end

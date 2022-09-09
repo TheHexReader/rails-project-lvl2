@@ -5,11 +5,17 @@ class PostsController < ApplicationController
   def show
     @post = Post.find_by(id: params[:id])
     return if @post.nil?
-
+    
+    puts '---'
     p @post
+    puts '---'
 
     @comments = PostComment.where(post_id: @post['id'].to_i, ancestry: nil)
     @likes = PostLike.where(post: @post)
+    p @comments
+    puts '---'
+    p @likes
+    puts '---'
   end
 
   def create

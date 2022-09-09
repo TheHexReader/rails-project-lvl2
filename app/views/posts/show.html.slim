@@ -28,7 +28,7 @@
   - @comments.each do |comment|
     .card.mb-4
       .card-header.small.mb-2.d-flex
-        = User.find_by(id: comment['user'].to_i)['email']
+        = User.find_by(id: comment[:user])['email']
       .card-body.flex-column
         .w-100
           .mb-3

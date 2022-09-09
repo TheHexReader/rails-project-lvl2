@@ -22,10 +22,12 @@ ActiveRecord::Schema.define(version: 2022_08_18_123545) do
     t.text "content"
     t.string "user"
     t.integer "post_id"
+    t.string "post"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "ancestry"
     t.index ["ancestry"], name: "index_post_comments_on_ancestry"
+    t.index ["post_id"], name: "index_post_comments_on_post_id"
   end
 
   create_table "post_likes", force: :cascade do |t|
@@ -33,6 +35,7 @@ ActiveRecord::Schema.define(version: 2022_08_18_123545) do
     t.string "user"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id"], name: "index_post_likes_on_post_id"
   end
 
   create_table "posts", force: :cascade do |t|

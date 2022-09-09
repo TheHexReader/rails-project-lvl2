@@ -2,5 +2,5 @@
 
 class PostComment < ApplicationRecord
   has_ancestry
-  belongs_to :posts, optional: true
+  belongs_to :post
 end

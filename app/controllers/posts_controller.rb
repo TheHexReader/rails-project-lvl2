@@ -6,7 +6,7 @@ class PostsController < ApplicationController
     @post = Post.find_by(id: params[:id])
     return if @post.nil?
 
-    @comments = PostComment.where(post: @post['id'].to_i, ancestry: nil)
+    @comments = PostComment.where(post_id: @post['id'].to_i, ancestry: nil)
     @likes = PostLike.where(post: @post)
   end
 

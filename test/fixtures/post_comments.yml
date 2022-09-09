@@ -2,4 +2,4 @@ one:
   id: 1
   content: Some comments for this comment
   user: '1'
-  post: 1
+  post_id: 1

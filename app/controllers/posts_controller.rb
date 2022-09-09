@@ -16,6 +16,8 @@ class PostsController < ApplicationController
     puts '---'
     p @likes
     puts '---'
+    p User.all
+    puts '---'
   end
 
   def create

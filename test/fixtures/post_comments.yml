@@ -1,5 +1,5 @@
 one:
   id: 1
   content: Some comments for this comment
-  user: '1'
+  user: one@email.com
   post_id: 1

@@ -9,6 +9,7 @@ module Posts
     end
 
     def create
+      p params
       @comment = PostComment.new(comment_params.merge(process_params(params)))
 
       if @comment.save
@@ -20,7 +21,7 @@ module Posts
 
     def destroy
       @comment = PostComment.find(params[:id])
-      if current_user['id'].to_s == @comment['user'].to_s
+      if current_user.email == @comment.user
         @comment.destroy
         redirect_to post_path(params[:post_id]), notice: 'success'
       else
@@ -36,7 +37,7 @@ module Posts
 
     def process_params(params)
       {
-        user: current_user['id'],
+        user: current_user.email,
         parent: params['comment_id'].nil? ? nil : PostComment.find_by(id: params['comment_id'])
       }
     end

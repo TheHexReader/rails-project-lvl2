@@ -22,7 +22,7 @@ class PostCommentsControllerTest < ActionDispatch::IntegrationTest
       user: 1,
       post_id: 1
     }
-    post post_comments_path(@post_one), params: attrs
+    post post_comments_path(@post_one), params: { comment: attrs }
 
     assert_redirected_to post_path(Post.find_by(id: attrs[:post_id]))
     assert_select '*', text: attrs['comments']

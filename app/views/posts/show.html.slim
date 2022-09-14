@@ -28,14 +28,14 @@
   - @comments.each do |comment|
     .card.mb-4
       .card-header.small.mb-2.d-flex
-        = User.find_by(id: comment[:user])['email']
+        = comment.user
       .card-body.flex-column
         .w-100
           .mb-3
-            = comment['content']
+            = comment.content
         - if comment.has_children?
           = render 'posts/comments/children_comments', comments: comment.child_ids
         hr.my-2
-        - if comment['user'].to_s == (current_user.nil? ? '' : current_user['id'].to_s)
+        - if comment.user == (current_user.nil? ? '' : current_user.email)
           = link_to 'Удалить', post_comment_path(comment, post_id: @post), method: :delete, class: 'btn btn-danger'
           = link_to 'Ответить', new_post_comment_path(@post, comment_id: comment.id), class: 'btn btn-primary'

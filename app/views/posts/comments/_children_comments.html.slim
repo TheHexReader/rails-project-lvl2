@@ -4,10 +4,10 @@
         .flex-column
           .mr-auto
             span.me-1
-              = User.find_by(id: PostComment.find_by(id: comment)['user'])['email']
+              = PostComment.find_by(id: comment).user
             p.mr-2
-              = PostComment.find_by(id: comment)['content']
-            - if PostComment.find_by(id: comment)['user'].to_s == (current_user.nil? ? '' : current_user['id'].to_s)
+              = PostComment.find_by(id: comment).content
+            - if PostComment.find_by(id: comment).user == (current_user.nil? ? '' : current_user.email)
               = link_to 'Удалить', post_comment_path(comment, post_id: @post), method: :delete, class: 'btn btn-danger'
               = link_to 'Ответить', new_post_comment_path(@post, comment_id: comment), class: 'btn btn-primary'
             - if PostComment.find_by(id: comment).has_children?

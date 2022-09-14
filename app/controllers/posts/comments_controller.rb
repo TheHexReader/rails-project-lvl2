@@ -9,7 +9,6 @@ module Posts
     end
 
     def create
-      p params
       @comment = PostComment.new(comment_params.merge(process_params(params)))
 
       if @comment.save

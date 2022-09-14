@@ -5,6 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.2'
 
+gem 'minitest', '5.15'
 gem 'ancestry'
 gem 'devise'
 gem 'minitest-power_assert'

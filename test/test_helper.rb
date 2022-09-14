@@ -9,6 +9,7 @@ require 'minitest/autorun'
 require 'minitest/power_assert'
 
 module ActiveSupport
+  # TestCase class
   class TestCase
     # Run tests in parallel with specified workers
     parallelize(workers: :number_of_processors)

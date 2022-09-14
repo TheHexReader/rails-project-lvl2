@@ -113,7 +113,7 @@ GEM
     matrix (0.4.2)
     method_source (1.0.0)
     mini_mime (1.1.2)
-    minitest (5.15.0)
+    minitest (5.16.3)
     minitest-power_assert (0.3.1)
       minitest
       power_assert (>= 1.1)
@@ -272,7 +272,7 @@ DEPENDENCIES
   faker
   jbuilder (~> 2.7)
   listen (~> 3.3)
-  minitest (= 5.15)
+  minitest (= 5.16.3)
   minitest-power_assert
   pg
   puma (~> 5.0)

@@ -11,7 +11,7 @@ module Posts
     def create
       @comment = PostComment.new(comment_params.merge(process_params(params)))
 
-      if @comment.save
+      if @comment.save!
         redirect_to post_path(params['post_id']), notice: 'success'
       else
         redirect_to post_path(params['post_id']), status: :unprocessable_entity

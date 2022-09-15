@@ -31,7 +31,7 @@ module Posts
     private
 
     def comment_params
-      params.permit(:content, :user, :post_id)
+      params.require(:post_comment).permit(:content, :user, :post_id)
     end
 
     def process_params(params)

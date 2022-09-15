@@ -19,10 +19,10 @@ class PostCommentsControllerTest < ActionDispatch::IntegrationTest
   test 'test create' do
     attrs = {
       content: 'Some comment text',
-      user: 1,
+      user: 'one@email.com',
       post_id: 1
     }
-    post post_comments_path(@post_one), params: { comment: attrs }
+    post post_comments_path(@post_one), params: { post_comment: attrs }
 
     assert_redirected_to post_path(Post.find_by(id: attrs[:post_id]))
     assert_select '*', text: attrs['comments']

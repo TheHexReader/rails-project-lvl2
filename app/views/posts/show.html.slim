@@ -20,7 +20,7 @@
   h1
     | Коментарии
 
-  = simple_form_for '', url: post_comments_path(@post.id) do |f|
+  = simple_form_for 'post_comment', url: post_comments_path(@post.id) do |f|
     = f.error_notification
     = f.input :content, label: 'Ваш коментарий:'
     = button_tag :Submit, type: 'submit', class: 'btn btn-success', name: 'post', value: @post['id']

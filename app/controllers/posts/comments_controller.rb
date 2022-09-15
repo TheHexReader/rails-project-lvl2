@@ -9,14 +9,10 @@ module Posts
     end
 
     def create
-      puts '---'
-      p params
-      puts '---'
-      p comment_params
       @comment = PostComment.new(comment_params.merge(process_params(params)))
 
       if @comment.save
-        redirect_to post_path(comment_params[:post_id]), notice: 'success'
+        redirect_to post_path(comment_params[:post_id]), notice: t('success')
       else
         redirect_to post_path(comment_params[:post_id]), status: :unprocessable_entity
       end
@@ -26,7 +22,7 @@ module Posts
       @comment = PostComment.find(params[:id])
       if current_user.email == @comment.user
         @comment.destroy
-        redirect_to post_path(params[:post_id]), notice: 'success'
+        redirect_to post_path(params[:post_id]), notice: t('success')
       else
         redirect_to root_path, status: :unauthorized
       end

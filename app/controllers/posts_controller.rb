@@ -33,7 +33,7 @@ class PostsController < ApplicationController
     @post = Post.find params[:id]
 
     if @post.update(post_params.merge(creator: current_user['id']))
-      redirect_to @post, notice: 'success'
+      redirect_to @post, notice: t('success')
     else
       render :edit, status: :unprocessable_entity
     end
@@ -43,7 +43,7 @@ class PostsController < ApplicationController
     @post = Post.find params[:id]
     if current_user['id'].to_s == @post['creator'].to_s
       @post.destroy
-      redirect_to user_path(current_user), notice: 'success'
+      redirect_to user_path(current_user), notice: t('success')
     else
       redirect_to root_path, status: :unauthorized
     end

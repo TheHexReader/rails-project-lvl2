@@ -18,7 +18,7 @@ class LikesControllerTest < ActionDispatch::IntegrationTest
     }
     post post_likes_path(posts(:one)), params: { post: attrs }
 
-    assert !PostLike.find_by(attrs).nil?
+    assert_not PostLike.find_by(attrs).nil?
   end
 
   test 'test delete' do

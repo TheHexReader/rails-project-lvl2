@@ -12,7 +12,7 @@ module Posts
       @like = PostLike.new(like_params.merge(current_user_hash))
 
       if @like.save
-        redirect_to post_path(@like[:post_id]), notice: 'success'
+        redirect_to post_path(@like[:post_id]), notice: t('success')
       else
         redirect_to post_path(@like[:post_id]), status: :unprocessable_entity
       end
@@ -22,7 +22,7 @@ module Posts
       @like = PostLike.find(like_params[:id])
 
       if @like.delete
-        redirect_to post_path(like_params[:post_id]), notice: 'success'
+        redirect_to post_path(like_params[:post_id]), notice: t('success')
       else
         redirect_to post_path(like_params[:post_id]), status: :unprocessable_entity
       end

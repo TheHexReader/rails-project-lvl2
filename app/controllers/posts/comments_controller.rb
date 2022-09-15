@@ -11,6 +11,8 @@ module Posts
     def create
       puts '---'
       p comment_params
+      puts '---'
+      p params
       @comment = PostComment.new(comment_params.merge(process_params(params)))
 
       if @comment.save

@@ -11,13 +11,14 @@ module Posts
     def create
       puts '---'
       p params
-      @comment = PostComment.new(comment_params.merge(process_params(params)))
       puts '---'
       p comment_params
-      if @comment.save!
-        redirect_to post_path(comment_params['post_id']), notice: 'success'
+      @comment = PostComment.new(comment_params.merge(process_params(params)))
+
+      if @comment.save
+        redirect_to post_path(comment_params[:post_id]), notice: 'success'
       else
-        redirect_to post_path(comment_params['post_id']), status: :unprocessable_entity
+        redirect_to post_path(comment_params[:post_id]), status: :unprocessable_entity
       end
     end
 
@@ -34,7 +35,7 @@ module Posts
     private
 
     def comment_params
-      params.require(:post_comment).permit(:content, :user, :post_id)
+      params.require(:post_comment).permit(:content).merge(params.permit(:user, :post_id))
     end
 
     def process_params(params)

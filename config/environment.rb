@@ -16,7 +16,7 @@ end
 
 begin
   Rails.application.initialize!
-rescue StandardError => e
+rescue Exception => e
   notify.call(e)
   raise
 end

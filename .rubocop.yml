@@ -8,3 +8,4 @@ AllCops:
     - 'config/initializers/*'
     - 'node_modules/**/*'
     - 'db/schema.rb'
+    - 'config/environment.rb'

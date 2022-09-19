@@ -12,3 +12,4 @@ jobs:
       - run: bundle install
       - run: yarn install
       - run: make run_test
+      - run: make lint

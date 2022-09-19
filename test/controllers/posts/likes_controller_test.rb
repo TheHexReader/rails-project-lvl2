@@ -16,15 +16,15 @@ class LikesControllerTest < ActionDispatch::IntegrationTest
     attrs = {
       user: '1'
     }
-    post post_likes_path(posts(:one)), params: { post: attrs }
+    post post_likes_path(posts(:one)), params: { post_like: attrs }
 
-    assert_not PostLike.find_by(attrs).nil?
+    assert { !PostLike.find_by(attrs).nil? }
   end
 
   test 'test delete' do
     like_one = post_likes(:one)
     delete post_like_path(like_one, post_id: like_one['post_id'])
 
-    assert PostLike.find_by(id: like_one[:id]).nil?
+    assert { PostLike.find_by(id: like_one[:id]).nil? }
   end
 end

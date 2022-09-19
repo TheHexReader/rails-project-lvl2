@@ -13,19 +13,20 @@ class PostCommentsControllerTest < ActionDispatch::IntegrationTest
 
   test 'test new' do
     get new_post_comment_path(@post_one['id'])
+    assert_response :success
     assert_select 'h1', text: 'Создать коментарий'
   end
 
   test 'test create' do
     attrs = {
-      content: 'Some comment text',
+      content: Faker::Lorem.sentence,
       user: 'one@email.com',
       post_id: 1
     }
     post post_comments_path(@post_one), params: { post_comment: attrs }
 
     assert_redirected_to post_path(Post.find_by(id: attrs[:post_id]))
-    assert_select '*', text: attrs['comments']
+    assert_select '*', text: attrs[:comments]
   end
 
   test 'test destroy' do
@@ -33,6 +34,6 @@ class PostCommentsControllerTest < ActionDispatch::IntegrationTest
 
     delete post_comment_path(comment_one, post_id: comment_one[:post_id])
 
-    assert PostComment.find_by(id: comment_one[:id]).nil?
+    assert { PostComment.find_by(id: comment_one[:id]).nil? }
   end
 end

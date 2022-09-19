@@ -3,6 +3,27 @@
 
 [![test](https://github.com/TheHexReader/rails-project-lvl2/actions/workflows/test.yml/badge.svg)](https://github.com/TheHexReader/rails-project-lvl2/actions/workflows/test.yml)
 
-# README
+# Проект: Коллективный блог
 
-Heroku app: https://collective-blog-rails-project.herokuapp.com/
+Коллективный блог - Аналог Habr. Каждый пользователь может создать запись и опубликовать ее в одной из общих категорий. Другие пользователи ставят оценки и комментируют добавленные посты.
+
+## Требования для запуска проекта
+
+- Ruby 3.0.2
+- Ruby on Rails 6.1.6.1
+- Node.js 16.16.0
+
+## Установка
+
+1. Клонировать репозиторий
+
+
+```bash
+bundle install
+yarn install
+bin/rails db:migrate
+bin/rails db:seed
+```
+
+## Ссылка на Heroku
+https://collective-blog-rails-project.herokuapp.com/

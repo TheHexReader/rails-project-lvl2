@@ -30,8 +30,8 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
 
   test 'test create' do
     attrs = {
-      title: 'Some Post',
-      body: 'Body of some post',
+      title: Faker::Lorem.sentence,
+      body: Faker::Lorem.paragraph,
       category_id: 1,
       creator: 1
     }
@@ -50,8 +50,8 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   test 'test update' do
     post_one = posts(:one)
     attrs = {
-      title: 'Some Edited Post',
-      body: 'Body of edited some post',
+      title: Faker::Lorem.sentence,
+      body: Faker::Lorem.paragraph,
       categories_id: 1,
       creator: 1
     }
@@ -66,6 +66,6 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
 
     delete post_path(post_one)
 
-    assert Post.find_by(id: post_one[:id]).nil?
+    assert { Post.find_by(id: post_one[:id]).nil? }
   end
 end

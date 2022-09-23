@@ -1,6 +1,6 @@
 = simple_form_for(@post) do |f|
   = f.error_notification
-  = f.input :title, label: 'Название:'
-  = f.input :body, as: :text, label: 'Текст:'
+  = f.input :title, label: 'Название:', required: true
+  = f.input :body, as: :text, label: 'Текст:', required: true
   = f.input :category_id, label: 'Категория:', collection: @categories
   = f.submit class: 'btn btn-success'

@@ -16,6 +16,8 @@
       p
         | Поставить лайк
       = button_to post_likes_path(@post['id']), class: 'text-decoration-none btn btn-success', method: :create
+        p 
+          | Like
 
   h1
     | Коментарии

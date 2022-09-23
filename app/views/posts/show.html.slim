@@ -12,11 +12,13 @@
                                                       post_id: @post[:id]),
                                                       class: 'text-decoration-none btn btn-danger',
                                                       method: :delete
+        p
+          | Like
     - else
       p
         | Поставить лайк
       = button_to post_likes_path(@post['id']), class: 'text-decoration-none btn btn-success', method: :create
-        p 
+        p
           | Like
 
   h1

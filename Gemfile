@@ -74,3 +74,5 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 group :production do
   gem 'pg'
 end
+
+gem "net-smtp", "~> 0.3.3"

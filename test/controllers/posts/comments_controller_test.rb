@@ -14,7 +14,7 @@ class PostCommentsControllerTest < ActionDispatch::IntegrationTest
   test 'test new' do
     get new_post_comment_path(@post_one['id'])
     assert_response :success
-    assert_select 'h1', text: 'Создать коментарий'
+    assert_select 'h4', text: 'Создать коментарий'
   end
 
   test 'test create' do

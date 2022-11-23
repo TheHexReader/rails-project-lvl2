@@ -25,7 +25,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
 
   test 'test new' do
     get new_post_path
-    assert_select 'h1', text: 'Новый пост'
+    assert_select 'h4', text: 'Новый пост'
   end
 
   test 'test create' do
@@ -44,7 +44,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   test 'test edit' do
     post_one = posts(:one)
     get edit_post_path(post_one)
-    assert_select 'h1', text: 'Редактировать пост'
+    assert_select 'h4', text: 'Редактировать пост'
   end
 
   test 'test update' do

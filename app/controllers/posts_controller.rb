@@ -2,6 +2,9 @@
 
 # User controller
 class PostsController < ApplicationController
+  before_action :authenticate_user!
+  skip_before_action :authenticate_user!, only: [:show]
+
   def show
     @post = Post.find_by(id: params[:id])
     return if @post.nil?
@@ -26,7 +29,11 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find params[:id]
+    if Post.find_by(params[:post_id]).creator.to_i == current_user.id.to_i
+      @post = Post.find params[:id]
+    else
+      redirect_to root_path, status: :unauthorized
+    end
   end
 
   def update

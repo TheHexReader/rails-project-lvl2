@@ -1,18 +1,15 @@
-h2
-  | Log in
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .field
-    = f.label :email
-    br
-    = f.email_field :email, autofocus: true, autocomplete: 'email'
-  .field
-    = f.label :password
-    br
-    = f.password_field :password, autocomplete: 'current-password'
-  - if devise_mapping.rememberable?
-    .field
-      = f.check_box :remember_me
-      = f.label :remember_me
-  .actions
-    = f.submit 'Log in'
-= render 'devise/shared/links'
+.d-flex.align-items-center.justify-content-center
+  .card.border-dark.shadow.p-3.w-25.m-5
+    = link_to "Зарегистрироваться", new_user_registration_path, class: "float-right btn btn-outline-primary"
+    h4.card-title.mb-4.mt-1.d-flex.align-items-center.justify-content-center.m-2
+      | Войти
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      = render 'devise/shared/error_messages'
+      .form-group
+        = f.label "Ваша почта"
+        = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "Email"
+      .form-group
+        = f.label 'Ваш пароль'
+        = f.password_field :password, autocomplete: "current-password", class: "form-control", placeholder: "******"
+      .form-group.d-flex.align-items-center.justify-content-center.m-2
+        = f.submit "Войти", class: "btn btn-primary btn-block"

@@ -1,6 +1,12 @@
 = simple_form_for(@post) do |f|
-  = f.error_notification
-  = f.input :title, label: 'Название:', required: true
-  = f.input :body, as: :text, label: 'Текст:', required: true
-  = f.input :category_id, label: 'Категория:', collection: @categories
-  = f.submit class: 'btn btn-success'
+  .form-group
+    = f.label 'Название'
+    = f.input :title, autofocus: true, placeholder: 'Название поста', required: true, label: false, input_html: {class: 'form-control'}
+  .form-group
+    = f.label 'Текст'
+    = f.input :body, as: :text, placeholder: 'Текст поста', required: true, label: false, input_html: {class: 'form-control'}
+  .form-group
+    = f.label 'Категория'
+    = f.input :category_id, collection: @categories, label: false, input_html: {class: 'form-control'}
+  .form-group.d-flex.align-items-center.justify-content-center.m-2
+    = f.submit 'Подтвердить', class: 'btn btn-primary'

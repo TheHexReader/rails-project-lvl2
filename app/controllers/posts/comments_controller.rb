@@ -4,6 +4,8 @@
 module Posts
   # Comments controller
   class CommentsController < ApplicationController
+    before_action :authenticate_user!
+
     def new
       @comment = PostComment.new
     end
@@ -11,7 +13,7 @@ module Posts
     def create
       @comment = PostComment.new(comment_params.merge(process_params(params)))
 
-      if @comment.save
+      if @comment.save && @comment.content != ''
         redirect_to post_path(comment_params[:post_id]), notice: t('success')
       else
         redirect_to post_path(comment_params[:post_id]), status: :unprocessable_entity

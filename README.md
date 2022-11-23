@@ -25,5 +25,5 @@ bin/rails db:migrate
 bin/rails db:seed
 ```
 
-## Ссылка на Heroku
-https://collective-blog-rails-project.herokuapp.com/
+## Ссылка на Railway
+https://rails-project-lvl2-production.up.railway.app

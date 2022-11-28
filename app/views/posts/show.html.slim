@@ -40,6 +40,7 @@
         - if comment.has_children?
           = render 'posts/comments/children_comments', comments: comment.child_ids
         hr.my-2
-        - if comment.user == (current_user.nil? ? '' : current_user.email)
-          = link_to 'Удалить', post_comment_path(comment, post_id: @post), method: :delete, class: 'btn btn-danger'
+        - if !current_user.nil?
           = link_to 'Ответить', new_post_comment_path(@post, comment_id: comment.id), class: 'btn btn-primary'
+          - if comment.user == current_user.email
+            = link_to 'Удалить', post_comment_path(comment, post_id: @post), method: :delete, class: 'btn btn-danger'

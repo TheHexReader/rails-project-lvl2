@@ -75,4 +75,7 @@ group :production do
   gem 'pg'
 end
 
-gem 'net-smtp', '~> 0.3.3', require: false
+gem 'net-pop', '~> 0.1.2'
+gem 'net-smtp', '~> 0.3.3'
+
+gem 'net-imap', '~> 0.3.1'

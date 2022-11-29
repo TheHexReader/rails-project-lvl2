@@ -41,7 +41,7 @@
           - if comment.has_children?
             = render 'posts/comments/children_comments', comments: comment.child_ids
         hr.my-2
-        - if comment.user == current_user.email && !current_user.nil?
+        - unless current_user.nil? && comment.user != current_user.email
           = link_to 'Удалить', post_comment_path(comment, post_id: @post), method: :delete, class: 'btn btn-danger'
       hr.my-2
       .mb-2.m-4

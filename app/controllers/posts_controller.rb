@@ -29,7 +29,8 @@ class PostsController < ApplicationController
   end
 
   def edit
-    if Post.find_by(params[:post_id]).creator.to_i == current_user.id.to_i
+    @categories = Category.all
+    if Post.find_by(id: params[:id]).creator.to_i == current_user.id
       @post = Post.find params[:id]
     else
       redirect_to root_path, status: :unauthorized

@@ -32,15 +32,27 @@
   - @comments.each do |comment|
     .card.mb-4
       .card-header.small.mb-2.d-flex
-        = comment.user
-      .card-body.flex-column
+        .font-weight-bold
+          = comment.user
+      .card-body.d-flex
         .w-100
           .mb-3
             = comment.content
-        - if comment.has_children?
-          = render 'posts/comments/children_comments', comments: comment.child_ids
+          - if comment.has_children?
+            = render 'posts/comments/children_comments', comments: comment.child_ids
         hr.my-2
-        - unless current_user.nil?
-          = link_to 'Ответить', new_post_comment_path(@post, comment_id: comment.id), class: 'btn btn-primary'
-          - if comment.user == current_user.email
-            = link_to 'Удалить', post_comment_path(comment, post_id: @post), method: :delete, class: 'btn btn-danger'
+        - if comment.user == current_user.email && !current_user.nil?
+          = link_to 'Удалить', post_comment_path(comment, post_id: @post), method: :delete, class: 'btn btn-danger'
+      hr.my-2
+      .mb-2.m-4
+        = link_to 'Ответить', "#new_post_comment_#{comment.id}", class: 'd-block small text-muted', 'data-bs-toggle': 'collapse'
+        .collapse id="new_post_comment_#{comment.id}" data-bs-target="#new_post_comment_#{comment.id}"
+          = simple_form_for 'post_comment', url: post_comments_path(@post.id) do |f|
+            = f.error_notification
+            = f.input :post, as: :hidden, input_html: { value: @post.id }
+            = f.input :comment_id, as: :hidden, input_html: { value: comment.id }
+            .form-group
+              = f.label 'Коментарий'
+              = f.input :content, autofocus: true, placeholder: 'Текст коментария', required: true, label: false, input_html: { class: 'form-control' }
+            .form-group.d-flex.align-items-center.justify-content-center.m-2
+              = f.submit 'Подтвердить', class: 'btn btn-primary'

@@ -13,7 +13,7 @@ module Posts
     def create
       @comment = PostComment.new(comment_params.merge(process_params(params)))
 
-      if @comment.save && @comment.content != ''
+      if @comment.save
         redirect_to post_path(comment_params[:post_id]), notice: t('success')
       else
         redirect_to post_path(comment_params[:post_id]), status: :unprocessable_entity
@@ -39,7 +39,11 @@ module Posts
     def process_params(params)
       {
         user: current_user.email,
-        parent: params['comment_id'].nil? ? nil : PostComment.find_by(id: params['comment_id'])
+        parent: if params['post_comment']['comment_id'].nil?
+                  nil
+                else
+                  PostComment.find_by(id: params['post_comment']['comment_id'])
+                end
       }
     end
   end

@@ -34,12 +34,13 @@
       .card-header.small.mb-2.d-flex
         .font-weight-bold
           = comment.user
-      .card-body.d-flex
+      .card-body
         .w-100
           .mb-3
             = comment.content
           - if comment.has_children?
-            = render 'posts/comments/children_comments', comments: comment.child_ids
+            .small
+              = render 'posts/comments/children_comments', comments: comment.child_ids
         hr.my-2
         - unless current_user.nil?
           = comment.user == current_user.email ? (link_to 'Удалить', post_comment_path(comment, post_id: @post), method: :delete, class: 'btn btn-danger') : nil

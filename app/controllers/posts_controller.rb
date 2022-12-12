@@ -16,7 +16,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params.merge(creator: current_user['id']))
 
-    if @post.save
+    if @post.save && !post_params[:category_id].nil?
       redirect_to post_path(@post)
     else
       render :new
@@ -30,10 +30,11 @@ class PostsController < ApplicationController
 
   def edit
     @categories = Category.all
+
     if Post.find_by(id: params[:id]).creator.to_i == current_user.id
       @post = Post.find params[:id]
     else
-      redirect_to root_path, status: :unauthorized
+      redirect_to root_path
     end
   end
 

@@ -4,7 +4,7 @@
     h4.card-title.mb-4.mt-1.d-flex.align-items-center.justify-content-center.m-2
       | Войти
     = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-      = render 'devise/shared/error_messages', resource: resource
+      = render 'devise/shared/error_messages'
       .form-group
         = f.label 'Ваша почта'
         = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control', placeholder: 'Email'

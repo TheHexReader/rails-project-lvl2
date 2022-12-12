@@ -1,5 +1,7 @@
 ---
 ru:
+  success: Успешно
+  fail: Не успешно
   activerecord:
     attributes:
       user:

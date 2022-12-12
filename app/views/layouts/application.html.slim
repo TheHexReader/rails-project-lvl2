@@ -12,4 +12,13 @@ html
     header
       = render 'shared/layouts/header'
     main[style='margin-top: 56px;']
+      - unless notice.nil? && alert.nil?
+        .d-flex.align-items-center.justify-content-center
+          .card.border-dark.shadow.p-1.w-50.m-3.text-center
+            - unless notice.nil?
+              p.notice
+                | #{notice}
+            - unless alert.nil?
+              p.alert
+                | #{alert}
       = yield

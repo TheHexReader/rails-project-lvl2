@@ -17,6 +17,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params.merge(creator: current_user['id']))
 
     if @post.save && !post_params[:category_id].nil? && check_if_category_is_chosen
+      flash[:notice] = 'Пост создан'
       redirect_to post_path(@post)
     else
       render :new

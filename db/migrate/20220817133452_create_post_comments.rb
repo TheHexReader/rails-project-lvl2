@@ -5,9 +5,8 @@ class CreatePostComments < ActiveRecord::Migration[6.1]
   def change
     create_table :post_comments do |t|
       t.text :content
-      t.string :user
+      t.belongs_to :user
       t.belongs_to :post
-      t.string :post
 
       t.timestamps
     end

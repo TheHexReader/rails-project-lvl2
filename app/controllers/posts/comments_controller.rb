@@ -22,7 +22,7 @@ module Posts
 
     def destroy
       @comment = PostComment.find(params[:id])
-      if current_user.email == @comment.user
+      if current_user.email == @comment.user.email
         @comment.destroy
         redirect_to post_path(params[:post_id]), notice: t('success')
       else
@@ -33,12 +33,12 @@ module Posts
     private
 
     def comment_params
-      params.require(:post_comment).permit(:content).merge(params.permit(:user, :post_id))
+      params.require(:post_comment).permit(:content).merge(params.permit(:user_id, :post_id))
     end
 
     def process_params(params)
       {
-        user: current_user.email,
+        user: current_user,
         parent: if params['post_comment']['comment_id'].nil?
                   nil
                 else

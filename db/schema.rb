@@ -20,14 +20,14 @@ ActiveRecord::Schema.define(version: 2022_08_18_123545) do
 
   create_table "post_comments", force: :cascade do |t|
     t.text "content"
-    t.string "user"
+    t.integer "user_id"
     t.integer "post_id"
-    t.string "post"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "ancestry"
     t.index ["ancestry"], name: "index_post_comments_on_ancestry"
     t.index ["post_id"], name: "index_post_comments_on_post_id"
+    t.index ["user_id"], name: "index_post_comments_on_user_id"
   end
 
   create_table "post_likes", force: :cascade do |t|

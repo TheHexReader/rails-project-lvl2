@@ -31,7 +31,7 @@ module Posts
     protected
 
     def current_user_hash
-      { user: current_user[:id] }
+      { user_id: current_user[:id] }
     end
 
     def like_params

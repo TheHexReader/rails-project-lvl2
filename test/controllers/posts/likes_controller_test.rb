@@ -23,7 +23,7 @@ class LikesControllerTest < ActionDispatch::IntegrationTest
 
   test 'test delete' do
     like_one = post_likes(:one)
-    delete post_like_path(like_one, post_id: like_one['post_id'])
+    delete post_like_path(like_one, post_id: like_one[:post])
 
     assert { PostLike.find_by(id: like_one[:id]).nil? }
   end

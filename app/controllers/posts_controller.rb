@@ -9,14 +9,14 @@ class PostsController < ApplicationController
     @post = Post.find_by(id: params[:id])
     return if @post.nil?
 
-    @comments = PostComment.where(post_id: @post['id'].to_i, ancestry: nil)
+    @comments = PostComment.where(post_id: @post.id, ancestry: nil)
     @likes = PostLike.where(post: @post)
   end
 
   def create
-    @post = Post.new(post_params.merge(creator: current_user['id']))
+    @post = Post.new(post_params.merge(creator: current_user.id))
 
-    if @post.save && !post_params[:category_id].nil? && check_if_category_is_chosen
+    if @post.save && !post_params[:category].nil? && check_if_category_is_chosen
       flash[:notice] = 'Пост создан'
       redirect_to post_path(@post)
     else
@@ -56,7 +56,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find params[:id]
-    if current_user['id'].to_s == @post['creator'].to_s
+    if current_user.id.to_s == @post[:creator].to_s
       @post.destroy
       redirect_to user_path(current_user), notice: t('success')
     else
@@ -67,11 +67,11 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body, :creator, :category_id)
+    params.require(:post).permit(:title, :body, :creator, :category)
   end
 
   def check_if_category_is_chosen
-    return true unless post_params[:category_id] == ''
+    return true unless post_params[:category] == ''
 
     flash[:notice] = 'Не выбранна категория'
     false

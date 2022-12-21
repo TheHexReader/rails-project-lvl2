@@ -7,9 +7,9 @@
     - if @likes.find_by(user: current_user[:id])
       p
         | Убрать лайк
-      = button_to post_like_path(id: PostLike.find_by(post_id: @post[:id],
+      = button_to post_like_path(id: PostLike.find_by(post: @post[:id],
                                                       user: current_user[:id])[:id],
-                                                      post_id: @post[:id]),
+                                                      post_id: @post),
                                                       class: 'text-decoration-none btn btn-danger',
                                                       method: :delete
         p
@@ -24,7 +24,7 @@
   h1
     | Коментарии
 
-  = simple_form_for 'post_comment', url: post_comments_path(@post.id) do |f|
+  = simple_form_for 'post_comment', url: post_comments_path(@post) do |f|
     = f.error_notification
     = f.input :content, label: 'Ваш коментарий:'
     = button_tag :Submit, type: 'submit', class: 'btn btn-success', name: 'post', value: @post['id']
@@ -48,7 +48,7 @@
       .mb-2.m-4
         = link_to 'Ответить', "#new_post_comment_#{comment.id}", class: 'd-block small text-muted', 'data-bs-toggle': 'collapse'
         .collapse id="new_post_comment_#{comment.id}" data-bs-target="#new_post_comment_#{comment.id}"
-          = simple_form_for 'post_comment', url: post_comments_path(@post.id) do |f|
+          = simple_form_for 'post_comment', url: post_comments_path(@post) do |f|
             = f.error_notification
             = f.input :post, as: :hidden, input_html: { value: @post.id }
             = f.input :comment_id, as: :hidden, input_html: { value: comment.id }

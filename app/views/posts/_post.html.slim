@@ -9,7 +9,7 @@
             | #{post['body']}
           .text-right.small.text-muted.mt-auto
             span.me-2
-              | Лайков: #{PostLike.where(post_id: post.id).count}
+              | Лайков: #{PostLike.where(post: post.id).count}
             span.me-2 |
             span.me-2
               | Созданно #{time_ago_in_words(post.created_at)} назад

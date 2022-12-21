@@ -32,12 +32,12 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     attrs = {
       title: Faker::Lorem.sentence,
       body: Faker::Lorem.paragraph,
-      category_id: 1,
+      category: 1,
       creator: 1
     }
     post posts_path, params: { post: attrs }
 
-    assert_redirected_to post_path(Post.find_by(attrs)['id'])
+    assert_redirected_to post_path(Post.find_by(attrs))
     assert_select '*', text: attrs['title']
   end
 

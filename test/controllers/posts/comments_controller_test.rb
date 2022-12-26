@@ -20,7 +20,7 @@ class PostCommentsControllerTest < ActionDispatch::IntegrationTest
   test 'test create' do
     attrs = {
       content: Faker::Lorem.sentence,
-      user: 'one@email.com',
+      user: 1,
       post: 1
     }
     post post_comments_path(@post_one), params: { post_comment: attrs }
@@ -32,7 +32,7 @@ class PostCommentsControllerTest < ActionDispatch::IntegrationTest
   test 'test destroy' do
     comment_one = post_comments(:one)
 
-    delete post_comment_path(comment_one, post: comment_one[:post])
+    delete post_comment_path(comment_one, post_id: comment_one[:post])
 
     assert { PostComment.find_by(id: comment_one[:id]).nil? }
   end

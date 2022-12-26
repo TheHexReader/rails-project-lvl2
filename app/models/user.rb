@@ -7,6 +7,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :posts, foreign_key: 'creator'
-  has_many :comments
-  has_many :likes
+  has_many :comments, foreign_key: 'user'
+  has_many :likes, foreign_key: 'user'
 end

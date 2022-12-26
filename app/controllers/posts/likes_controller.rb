@@ -22,9 +22,9 @@ module Posts
       @like = PostLike.find(like_params[:id])
 
       if @like.delete
-         redirect_to post_path(like_params[:post]), notice: t('success')
+        redirect_to post_path(@like.post), notice: t('success')
       else
-        redirect_to post_path(like_params[:post]), status: :unprocessable_entity
+        redirect_to post_path(@like.post), status: :unprocessable_entity
       end
     end
 

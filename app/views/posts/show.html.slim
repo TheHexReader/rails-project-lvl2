@@ -7,9 +7,7 @@
     - if @likes.find_by(user: current_user[:id])
       p
         | Убрать лайк
-      = button_to post_like_path(id: PostLike.find_by(post: @post[:id],
-                                                      user: current_user[:id])[:id],
-                                                      post_id: @post),
+      = button_to post_like_path(@post.id, PostLike.find_by(post: @post, user: current_user).id),
                                                       class: 'text-decoration-none btn btn-danger',
                                                       method: :delete
         p
@@ -17,7 +15,7 @@
     - else
       p
         | Поставить лайк
-      = button_to post_likes_path(@post['id']), class: 'text-decoration-none btn btn-success', method: :create
+      = button_to post_likes_path(@post.id), class: 'text-decoration-none btn btn-success', method: :create
         p
           | Like
 

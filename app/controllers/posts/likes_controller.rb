@@ -7,14 +7,15 @@ module Posts
     skip_before_action :verify_authenticity_token
 
     def create
-      return unless PostLike.where(like_params).empty?
+      return unless PostLike.where(processed_hash).empty?
 
-      @like = PostLike.new(like_params.merge(current_user_hash))
+      p like_params
+      @like = PostLike.new(processed_hash)
 
       if @like.save
-        redirect_to post_path(@like[:post]), notice: t('success')
+        redirect_to post_path(@like.post), notice: t('success')
       else
-        redirect_to post_path(@like[:post]), status: :unprocessable_entity
+        redirect_to post_path(@like.post), status: :unprocessable_entity
       end
     end
 
@@ -30,12 +31,15 @@ module Posts
 
     protected
 
-    def current_user_hash
-      { user: current_user.id }
+    def processed_hash
+      {
+        user: current_user,
+        post: Post.find_by(id: like_params[:post_id])
+      }
     end
 
     def like_params
-      params.permit(:post, :id).merge(current_user_hash)
+      params.permit(:post_id, :id)
     end
   end
 end

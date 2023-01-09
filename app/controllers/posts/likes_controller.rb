@@ -7,10 +7,10 @@ module Posts
     skip_before_action :verify_authenticity_token
 
     def create
-      return unless PostLike.where(processed_hash).empty?
+      return unless PostLike.where(processed_params).empty?
 
       p like_params
-      @like = PostLike.new(processed_hash)
+      @like = PostLike.new(processed_params)
 
       if @like.save
         redirect_to post_path(@like.post), notice: t('success')
@@ -31,15 +31,15 @@ module Posts
 
     protected
 
-    def processed_hash
+    def processed_params
       {
         user: current_user,
-        post: Post.find_by(id: like_params[:post_id])
+        post: Post.find_by(id: like_params[:post])
       }
     end
 
     def like_params
-      params.permit(:post_id, :id)
+      params.permit(:post, :id)
     end
   end
 end

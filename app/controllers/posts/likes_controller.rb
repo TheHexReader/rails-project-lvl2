@@ -34,12 +34,12 @@ module Posts
     def processed_params
       {
         user: current_user,
-        post: Post.find_by(id: like_params[:post])
+        post: Post.find_by(id: like_params[:post_id])
       }
     end
 
     def like_params
-      params.permit(:post, :id)
+      params.permit(:post_id, :id)
     end
   end
 end

@@ -14,9 +14,9 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params.merge(creator: current_user.id))
+    @post = Post.new(processed_params)
 
-    if @post.save && !post_params[:category].nil? && check_if_category_is_chosen
+    if @post.save && !processed_params[:category].nil? && check_if_category_is_chosen
       flash[:notice] = 'Пост создан'
       redirect_to post_path(@post)
     else
@@ -68,6 +68,15 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :body, :creator, :category)
+  end
+
+  def processed_params
+    {
+      title: post_params[:title],
+      body: post_params[:body],
+      creator: current_user.id,
+      category: post_params[:category]
+    }
   end
 
   def check_if_category_is_chosen

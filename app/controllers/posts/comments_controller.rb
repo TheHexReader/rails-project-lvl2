@@ -12,7 +12,7 @@ module Posts
 
     def create
       @comment = PostComment.new(comment_params.merge(process_params(params)))
-
+      p params
       if @comment.save
         redirect_to post_path(@comment.post), notice: t('success')
       else
@@ -38,7 +38,7 @@ module Posts
 
     def process_params(params)
       {
-        post: Post.find(params[:post_comment][:post]),
+        post: Post.find(params[:post_id]),
         user: User.find(params[:post_comment][:user]),
         parent: if params[:post_comment][:comment].nil?
                   nil

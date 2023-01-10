@@ -9,13 +9,12 @@ module Posts
     def create
       return unless PostLike.where(processed_params).empty?
 
-      p like_params
       @like = PostLike.new(processed_params)
 
       if @like.save
-        redirect_to post_path(@like.post), notice: t('success')
+        redirect_to post_path(like_params[:post_id]), notice: t('success')
       else
-        redirect_to post_path(@like.post), status: :unprocessable_entity
+        redirect_to post_path(like_params[:post_id]), status: :unprocessable_entity
       end
     end
 

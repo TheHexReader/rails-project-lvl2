@@ -11,8 +11,8 @@ module Posts
     end
 
     def create
-      @comment = PostComment.new(comment_params.merge(process_params(params)))
       p params
+      @comment = PostComment.new(comment_params.merge(process_params(params)))
       if @comment.save
         redirect_to post_path(@comment.post), notice: t('success')
       else

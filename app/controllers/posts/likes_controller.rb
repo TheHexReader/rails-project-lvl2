@@ -9,7 +9,9 @@ module Posts
     def create
       return unless PostLike.where(like_params).empty?
 
+      # p processed_params
       @like = PostLike.new(processed_params)
+      p @like
 
       if @like.save
         redirect_to post_path(like_params[:post]), notice: t('success')

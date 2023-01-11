@@ -36,10 +36,13 @@ module Posts
     protected
 
     def processed_params
-      {
+      p '--- Test find_by start ---'
+      out = {
         user: current_user,
         post: Post.find_by(id: like_params[:post_id])
       }
+      p '--- Test find_by end ---'
+      out
     end
 
     def like_params

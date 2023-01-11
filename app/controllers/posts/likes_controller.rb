@@ -7,9 +7,13 @@ module Posts
     skip_before_action :verify_authenticity_token
 
     def create
+      p '--- Like params ---'
+      p like_params
+      p '--- Processed params ---'
+      p processed_params
+      
       return unless PostLike.where({ id: like_params[:id] }).empty?
 
-      # p processed_params
       @like = PostLike.new(processed_params)
 
       if @like.save

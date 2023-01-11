@@ -9,7 +9,7 @@ module Posts
     def create
       return unless PostLike.where({ id: like_params[:id] }).empty?
 
-      @like = PostLike.new(like_params.merge(user_id: current_user.id))
+      @like = PostLike.new(like_params)
 
       if @like.save
         redirect_to post_path(like_params[:post_id]), notice: t('success')
@@ -31,7 +31,7 @@ module Posts
     protected
 
     def like_params
-      params.permit(:post_id, :id)
+      params.permit(:post_id, :id).merge(user_id: current_user.id)
     end
   end
 end

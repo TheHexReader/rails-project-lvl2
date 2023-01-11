@@ -32,7 +32,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     attrs = {
       title: Faker::Lorem.sentence,
       body: Faker::Lorem.paragraph,
-      category_id: 1
+      category: 1
     }
     post posts_path, params: { post: attrs }
 
@@ -51,7 +51,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     attrs = {
       title: Faker::Lorem.sentence,
       body: Faker::Lorem.paragraph,
-      category_id: 1
+      category: 1
     }
     patch post_path(post_one), params: { post: attrs }
 

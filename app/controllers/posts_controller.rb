@@ -16,7 +16,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
 
-    if @post.save && !post_params[:category_id].nil? && check_if_category_is_chosen
+    if @post.save && !post_params[:category].nil? && check_if_category_is_chosen
       flash[:notice] = 'Пост создан'
       redirect_to post_path(@post)
     else
@@ -67,7 +67,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body, :creator, :category_id)
+    params.require(:post).permit(:title, :body, :creator, :category)
   end
 
   def check_if_category_is_chosen

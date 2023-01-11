@@ -14,9 +14,9 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params.merge(creator: current_user.id))
+    @post = Post.new(post_params.merge(creator_id: current_user.id))
 
-    if @post.save && !post_params[:category].nil? && check_if_category_is_chosen
+    if @post.save && !post_params[:category_id].nil? && check_if_category_is_chosen
       redirect_to post_path(@post)
       flash[:notice] = 'Пост создан'
     else
@@ -32,7 +32,7 @@ class PostsController < ApplicationController
   def edit
     @categories = Category.all
 
-    if Post.find_by(id: params[:id]).creator.to_i == current_user.id
+    if Post.find_by(id: params[:id]).creator_id.to_i == current_user.id
       @post = Post.find params[:id]
     else
       redirect_to root_path
@@ -47,7 +47,7 @@ class PostsController < ApplicationController
       return
     end
 
-    if @post.update(post_params.merge(creator: current_user['id']))
+    if @post.update(post_params.merge(creator_id: current_user['id']))
       redirect_to @post, notice: t('success')
     else
       render :edit
@@ -56,7 +56,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find params[:id]
-    if current_user.id.to_s == @post[:creator].to_s
+    if current_user.id.to_s == @post[:creator_id].to_s
       @post.destroy
       redirect_to user_path(current_user), notice: t('success')
     else
@@ -67,11 +67,11 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body, :creator, :category)
+    params.require(:post).permit(:title, :body, :creator_id, :category_id)
   end
 
   def check_if_category_is_chosen
-    return true unless post_params[:category] == ''
+    return true unless post_params[:category_id] == ''
 
     flash[:notice] = 'Не выбранна категория'
     false

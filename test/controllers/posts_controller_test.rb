@@ -32,7 +32,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     attrs = {
       title: Faker::Lorem.sentence,
       body: Faker::Lorem.paragraph,
-      category: 1
+      category_id: 1
     }
     post posts_path, params: { post: attrs }
 

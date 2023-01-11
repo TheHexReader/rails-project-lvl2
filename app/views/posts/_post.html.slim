@@ -15,7 +15,7 @@
               | Созданно #{time_ago_in_words(post.created_at)} назад
             span.me-2 |
             span.me-2
-              | Категория: #{Category.find_by(id: post['category_id']).nil? ? 'Категории нет' : Category.find_by(id: post['category_id'])['name']}
+              | Категория: #{Category.find_by(id: post[:category]).nil? ? 'Категории нет' : Category.find_by(id: post[:category])[:name]}
             span.me-2 |
             span.me-2
-              | Автор: #{User.find_by(id: post['creator']).nil? ? 'Автора нет' : User.find_by(id: post['creator'])['email']}
+              | Автор: #{User.find_by(id: post[:creator]).nil? ? 'Автора нет' : User.find_by(id: post[:creator])[:email]}

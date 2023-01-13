@@ -9,13 +9,13 @@
             | #{post['body']}
           .text-right.small.text-muted.mt-auto
             span.me-2
-              | Лайков: #{PostLike.where(post: post.id).count}
+              | Лайков: #{post.likes.count}
             span.me-2 |
             span.me-2
               | Созданно #{time_ago_in_words(post.created_at)} назад
             span.me-2 |
             span.me-2
-              | Категория: #{Category.find_by(id: post[:category]).nil? ? 'Категории нет' : Category.find_by(id: post[:category])[:name]}
+              | Категория: #{post.category.name}
             span.me-2 |
             span.me-2
-              | Автор: #{User.find_by(id: post[:creator]).nil? ? 'Автора нет' : User.find_by(id: post[:creator])[:email]}
+              | Автор: #{post.creator.email}

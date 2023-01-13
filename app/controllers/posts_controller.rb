@@ -18,7 +18,7 @@ class PostsController < ApplicationController
 
     if @post.save && !post_params[:category_id].nil? && check_if_category_is_chosen
       redirect_to post_path(@post)
-      flash[:notice] = 'Пост создан'
+      flash[:notice] = t('post_created')
     else
       render :new
     end
@@ -73,7 +73,7 @@ class PostsController < ApplicationController
   def check_if_category_is_chosen
     return true unless post_params[:category_id] == ''
 
-    flash[:notice] = 'Не выбранна категория'
+    flash[:notice] = t('no_chosen_category')
     false
   end
 end

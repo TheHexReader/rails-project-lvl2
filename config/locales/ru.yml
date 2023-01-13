@@ -1,5 +1,7 @@
 ---
 ru:
+  post_created: 'Пост создан'
+  no_chosen_category: 'Не выбранна категория'
   success: Успешно
   fail: Не успешно
   activerecord:

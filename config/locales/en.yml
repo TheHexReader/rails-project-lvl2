@@ -31,3 +31,5 @@
 
 en:
   success: "Success"
+  post_created: 'Post created'
+  no_chosen_category: 'Не выбранна категория'

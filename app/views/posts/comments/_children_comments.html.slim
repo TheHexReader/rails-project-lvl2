@@ -7,19 +7,19 @@
           p.mr-2
             = PostComment.find_by(id: comment).content
           - if PostComment.find_by(id: comment).user == (current_user.nil? ? '' : current_user.email)
-            = link_to 'Удалить', post_comment_path(comment, post_id: @post), method: :delete, class: 'btn btn-danger'
+            = link_to t('delete'), post_comment_path(comment, post_id: @post), method: :delete, class: 'btn btn-danger'
           - if PostComment.find_by(id: comment).has_children?
             = render 'posts/comments/children_comments', comments: PostComment.find_by(id: comment).child_ids
     hr.my-2
     .mb-2.m-4
-      = link_to 'Ответить', "#new_post_comment_#{comment}", class: 'd-block small text-muted', 'data-bs-toggle': 'collapse'
+      = link_to t('answer'), "#new_post_comment_#{comment}", class: 'd-block small text-muted', 'data-bs-toggle': 'collapse'
       .collapse id="new_post_comment_#{comment}" data-bs-target="#new_post_comment_#{comment}"
         = simple_form_for 'post_comment', url: post_comments_path(@post.id) do |f|
           = f.error_notification
           = f.input :post, as: :hidden, input_html: { value: @post.id }
           = f.input :comment_id, as: :hidden, input_html: { value: comment }
           .form-group
-            = f.label 'Коментарий'
+            = f.label t('comment_label')
             = f.input :content, autofocus: true, placeholder: 'Текст коментария', required: true, label: false, input_html: { class: 'form-control' }
           .form-group.d-flex.align-items-center.justify-content-center.m-2
-            = f.submit 'Подтвердить', class: 'btn btn-primary'
+            = f.submit t('confirm'), class: 'btn btn-primary'

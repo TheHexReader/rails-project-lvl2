@@ -2,30 +2,28 @@
   = render 'post', post: @post
 
   h5
-    | Понравилось [#{@likes.length}]
+    | #{t('like_counter', likes: @likes.length)}
   - unless current_user.nil?
     - if @likes.find_by(user: current_user[:id])
       p
-        | Убрать лайк
       = button_to post_like_path(@post.id, PostLike.find_by(post: @post, user: current_user).id),
                                                       class: 'text-decoration-none btn btn-danger',
                                                       method: :delete
         p
-          | Like
+          | #{t('delete_like')}
     - else
       p
-        | Поставить лайк
       = button_to post_likes_path(@post.id), class: 'text-decoration-none btn btn-success', method: :create
         p
-          | Like
+          | #{t('give_like')}
 
   h1
-    | Коментарии
+    | #{t('comments')}
 
   = simple_form_for 'post_comment', url: post_comments_path(@post) do |f|
     = f.error_notification
-    = f.input :content, label: 'Ваш коментарий:'
-    = button_tag :Submit, type: 'submit', class: 'btn btn-success', name: 'post', value: @post['id']
+    = f.input :content, label: t('your_comment')
+    = button_tag t('confirm'), type: 'submit', class: 'btn btn-success', name: 'post', value: @post['id']
 
   - @comments.each do |comment|
     .card.mb-4
@@ -41,17 +39,17 @@
               = render 'posts/comments/children_comments', comments: comment.child_ids
         hr.my-2
         - unless current_user.nil?
-          = comment.user == current_user.email ? (link_to 'Удалить', post_comment_path(comment, post_id: @post), method: :delete, class: 'btn btn-danger') : nil
+          = comment.user == current_user.email ? (link_to t('delete'), post_comment_path(comment, post_id: @post), method: :delete, class: 'btn btn-danger') : nil
       hr.my-2
       .mb-2.m-4
-        = link_to 'Ответить', "#new_post_comment_#{comment.id}", class: 'd-block small text-muted', 'data-bs-toggle': 'collapse'
+        = link_to t('answer'), "#new_post_comment_#{comment.id}", class: 'd-block small text-muted', 'data-bs-toggle': 'collapse'
         .collapse id="new_post_comment_#{comment.id}" data-bs-target="#new_post_comment_#{comment.id}"
           = simple_form_for 'post_comment', url: post_comments_path(@post) do |f|
             = f.error_notification
             = f.input :post, as: :hidden, input_html: { value: @post.id }
             = f.input :comment_id, as: :hidden, input_html: { value: comment.id }
             .form-group
-              = f.label 'Коментарий'
-              = f.input :content, autofocus: true, placeholder: 'Текст коментария', required: true, label: false, input_html: { class: 'form-control' }
+              = f.label t('comment_label')
+              = f.input :content, autofocus: true, placeholder: t('comment_placeholder'), required: true, label: false, input_html: { class: 'form-control' }
             .form-group.d-flex.align-items-center.justify-content-center.m-2
-              = f.submit 'Подтвердить', class: 'btn btn-primary'
+              = f.submit t('confirm'), class: 'btn btn-primary'

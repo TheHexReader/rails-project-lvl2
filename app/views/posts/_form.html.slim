@@ -1,12 +1,12 @@
 = simple_form_for(@post) do |f|
   .form-group
-    = f.label 'Название'
-    = f.input :title, autofocus: true, placeholder: 'Название поста', required: true, label: false, input_html: { class: 'form-control' }
+    = f.label t('title')
+    = f.input :title, autofocus: true, placeholder: t('title_placeholder'), required: true, label: false, input_html: { class: 'form-control' }
   .form-group
-    = f.label 'Текст'
-    = f.input :body, as: :text, placeholder: 'Текст поста', required: true, label: false, input_html: { class: 'form-control' }
+    = f.label t('post_body')
+    = f.input :body, as: :text, placeholder: t('post_body_placeholder'), required: true, label: false, input_html: { class: 'form-control' }
   .form-group
-    = f.label 'Категория'
-    = f.input :category_id, collection: @categories, label: false, input_html: { class: 'form-control' }
+    = f.label t('category')
+    = f.association :category, label: false, input_html: { class: 'form-control' }
   .form-group.d-flex.align-items-center.justify-content-center.m-2
-    = f.submit 'Подтвердить', class: 'btn btn-primary'
+    = f.submit t('confirm'), class: 'btn btn-primary'

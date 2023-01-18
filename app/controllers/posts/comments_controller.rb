@@ -6,12 +6,10 @@ module Posts
   class CommentsController < ApplicationController
     before_action :authenticate_user!
 
-    def new
-      @comment = PostComment.new
-    end
-
     def create
-      @comment = PostComment.new(comment_params)
+      @post = Post.find(params[:post_id])
+      @comment = @post.comments.build(comment_params)
+      @comment.user = current_user
       if @comment.save
         redirect_to post_path(@comment.post), notice: t('success')
       else
@@ -19,20 +17,10 @@ module Posts
       end
     end
 
-    def destroy
-      @comment = PostComment.find(params[:id])
-      if current_user.email == @comment.user.email
-        @comment.destroy
-        redirect_to post_path(@comment.post), notice: t('success')
-      else
-        redirect_to root_path, status: :unauthorized
-      end
-    end
-
     private
 
     def comment_params
-      params.require(:post_comment).permit(:content).merge(params.permit(:post_id)).merge(user_id: current_user.id)
+      params.require(:post_comment).permit(:content)
     end
   end
 end

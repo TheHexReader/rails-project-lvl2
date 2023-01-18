@@ -4,7 +4,7 @@
 module Posts
   # Likes controller
   class LikesController < ApplicationController
-    skip_before_action :verify_authenticity_token
+    before_action :authenticate_user!
 
     def create
       return unless PostLike.where({ id: like_params[:id] }).empty?

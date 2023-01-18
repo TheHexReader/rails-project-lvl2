@@ -1,7 +1,7 @@
 .nav.nav-pills.mb-3.justify-content-center
   - if @posts.empty?
     h3
-      | Постов нет :(
+      | #{t('no_posts')}
   - else
     - @posts.each do |post|
       = render 'posts/post', post:

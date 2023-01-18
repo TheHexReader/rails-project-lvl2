@@ -9,13 +9,13 @@
             | #{post['body']}
           .text-right.small.text-muted.mt-auto
             span.me-2
-              | Лайков: #{post.likes.count}
+              | #{t('like_counter', likes: post.likes.count)}
             span.me-2 |
             span.me-2
-              | Созданно #{time_ago_in_words(post.created_at)} назад
+              | #{t('minutes_ago', time: time_ago_in_words(post.created_at))}
             span.me-2 |
             span.me-2
-              | Категория: #{post.category.name}
+              | #{t('category_label', category: post.category.name)}
             span.me-2 |
             span.me-2
-              | Автор: #{post.creator.email}
+              | #{t('creator', creator: post.creator.email)}

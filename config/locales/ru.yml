@@ -4,7 +4,7 @@ ru:
   delete_like: 'Убрать лайк'
   give_like: 'Лайкнуть'
   post_created: 'Пост создан'
-  no_chosen_category: 'Не выбранна категория'
+  cant_create_post: 'Невозможно сохранить пост'
   minutes_ago: 'Созданно %{time} назад'
   category_label: 'Категория: %{category}'
   creator: 'Автор: %{creator}'
@@ -35,6 +35,7 @@ ru:
   show: 'Показать'
   edit: 'Редактировать'
   you_sure_confirm: 'Вы уверенны?'
+  collective_blog: 'Коллективный Блог'
   success: Успешно
   fail: Не успешно
   activerecord:

@@ -3,8 +3,8 @@
 
   h5
     | #{t('like_counter', likes: @likes.length)}
-  - unless current_user.nil?
-    - if @likes.find_by(user: current_user[:id])
+  - unless user_signed_in?
+    - if @like
       p
       = button_to post_like_path(@post.id, PostLike.find_by(post: @post, user: current_user).id),
                                                       class: 'text-decoration-none btn btn-danger',
@@ -20,12 +20,11 @@
   h1
     | #{t('comments')}
 
-  = simple_form_for 'post_comment', url: post_comments_path(@post) do |f|
-    = f.error_notification
-    = f.input :content, label: t('your_comment')
-    = button_tag t('confirm'), type: 'submit', class: 'btn btn-success', name: 'post', value: @post['id']
+  .w-25
+    = render 'posts/comments/form', post: @post, comment: nil
 
   - @comments.each do |comment|
+    - comment = comment[0]
     .card.mb-4
       .card-header.small.mb-2.d-flex
         .font-weight-bold
@@ -37,19 +36,8 @@
           - if comment.has_children?
             .small
               = render 'posts/comments/children_comments', comments: comment.child_ids
-        hr.my-2
-        - unless current_user.nil?
-          = comment.user == current_user.email ? (link_to t('delete'), post_comment_path(comment, post_id: @post), method: :delete, class: 'btn btn-danger') : nil
       hr.my-2
       .mb-2.m-4
         = link_to t('answer'), "#new_post_comment_#{comment.id}", class: 'd-block small text-muted', 'data-bs-toggle': 'collapse'
         .collapse id="new_post_comment_#{comment.id}" data-bs-target="#new_post_comment_#{comment.id}"
-          = simple_form_for 'post_comment', url: post_comments_path(@post) do |f|
-            = f.error_notification
-            = f.input :post, as: :hidden, input_html: { value: @post.id }
-            = f.input :comment_id, as: :hidden, input_html: { value: comment.id }
-            .form-group
-              = f.label t('comment_label')
-              = f.input :content, autofocus: true, placeholder: t('comment_placeholder'), required: true, label: false, input_html: { class: 'form-control' }
-            .form-group.d-flex.align-items-center.justify-content-center.m-2
-              = f.submit t('confirm'), class: 'btn btn-primary'
+          = render 'posts/comments/form', post: @post, comment: comment

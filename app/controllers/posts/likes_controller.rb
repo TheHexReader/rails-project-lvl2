@@ -7,31 +7,31 @@ module Posts
     before_action :authenticate_user!
 
     def create
-      return unless PostLike.where({ id: like_params[:id] }).empty?
+      return unless find_likes
 
-      @like = PostLike.new(like_params)
-
+      @like = Post.find(params[:post_id]).likes.build(user_id: current_user.id)
+      
       if @like.save
-        redirect_to post_path(like_params[:post_id]), notice: t('success')
+        redirect_to post_path(params[:post_id]), notice: t('success')
       else
-        redirect_to post_path(like_params[:post_id]), status: :unprocessable_entity
+        redirect_to post_path(params[:post_id]), status: :unprocessable_entity
       end
     end
 
     def destroy
-      @like = PostLike.find(like_params[:id])
+      @like = PostLike.find(params[:id])
 
       if @like.delete
-        redirect_to post_path(like_params[:post_id]), notice: t('success')
+        redirect_to post_path(params[:post_id]), notice: t('success')
       else
-        redirect_to post_path(like_params[:post_id]), status: :unprocessable_entity
+        redirect_to post_path(params[:post_id]), status: :unprocessable_entity
       end
     end
 
-    protected
+    private
 
-    def like_params
-      params.permit(:post_id, :id).merge(user_id: current_user.id)
+    def find_likes
+      PostLike.where({ id: params[:id] }).empty?
     end
   end
 end

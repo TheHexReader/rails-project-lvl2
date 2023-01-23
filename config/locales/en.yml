@@ -32,7 +32,7 @@
 en:
   success: 'Success'
   post_created: 'Post created'
-  no_chosen_category: 'No chosen category'
+  cant_create_post: "Can't save post"
   like_counter: 'Likes: %{likes}'
   delete_like: 'Unlike'
   give_like: 'Like it'
@@ -65,3 +65,4 @@ en:
   show: 'Show'
   edit: 'Edit'
   you_sure_confirm: 'Are you sure?'
+  collective_blog: 'Collective Blog'

@@ -3,11 +3,13 @@
 # Post controller
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: %i[create new edit update destroy]
+  skip_before_action :verify_authenticity_token
 
   def show
-    @post = Post.find(params[:id])
-    @comments = @post.comments
+    @post = Post.includes(:category).find(params[:id])
+    @comments = @post.comments.includes(:user).arrange
     @likes = @post.likes
+    @like = @likes.find_by(user: current_user[:id])
   end
 
   def create
@@ -18,7 +20,7 @@ class PostsController < ApplicationController
       flash[:notice] = t('post_created')
     else
       render :new
-      flash[:notice] = t('no_chosen_category') if @post.category_id.nil?
+      flash[:notice] = t('cant_create_post') if @post.category_id.nil?
     end
   end
 
@@ -27,7 +29,7 @@ class PostsController < ApplicationController
   end
 
   def edit
-    if Post.find(params[:id]).creator_id.to_i == current_user.id
+    if current_user.posts.find(params[:id]).creator_id == current_user.id
       @post = Post.find params[:id]
     else
       redirect_to root_path
@@ -37,7 +39,7 @@ class PostsController < ApplicationController
   def update
     @post = current_user.posts.find(params[:id])
 
-    if @post.update(post_params.merge(creator_id: current_user['id']))
+    if @post.update(post_params)
       redirect_to @post, notice: t('success')
     else
       render :edit

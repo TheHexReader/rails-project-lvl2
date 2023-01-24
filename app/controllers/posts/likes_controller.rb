@@ -10,7 +10,7 @@ module Posts
       return unless find_likes
 
       @like = Post.find(params[:post_id]).likes.build(user_id: current_user.id)
-      
+
       if @like.save
         redirect_to post_path(params[:post_id]), notice: t('success')
       else

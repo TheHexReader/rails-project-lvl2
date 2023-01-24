@@ -3,7 +3,7 @@
 
   h5
     | #{t('like_counter', likes: @likes.length)}
-  - unless user_signed_in?
+  - if user_signed_in?
     - if @like
       p
       = button_to post_like_path(@post.id, PostLike.find_by(post: @post, user: current_user).id),
@@ -23,8 +23,7 @@
   .w-25
     = render 'posts/comments/form', post: @post, comment: nil
 
-  - @comments.each do |comment|
-    - comment = comment[0]
+  - @comments.each do |comment, children|
     .card.mb-4
       .card-header.small.mb-2.d-flex
         .font-weight-bold
@@ -35,9 +34,9 @@
             = comment.content
           - if comment.has_children?
             .small
-              = render 'posts/comments/children_comments', comments: comment.child_ids
+              = render 'posts/comments/children_comments', comments: children
       hr.my-2
       .mb-2.m-4
         = link_to t('answer'), "#new_post_comment_#{comment.id}", class: 'd-block small text-muted', 'data-bs-toggle': 'collapse'
         .collapse id="new_post_comment_#{comment.id}" data-bs-target="#new_post_comment_#{comment.id}"
-          = render 'posts/comments/form', post: @post, comment: comment
+          = render 'posts/comments/form', post: @post, comment:

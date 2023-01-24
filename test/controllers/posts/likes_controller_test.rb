@@ -7,18 +7,16 @@ class LikesControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
   setup do
-    get new_user_session_path
     sign_in users(:one)
-    post user_session_path
   end
 
   test 'test create' do
     attrs = {
-      user: '1'
+      user: users(:one).id
     }
     post post_likes_path(posts(:one)), params: { post_like: attrs }
 
-    assert { !PostLike.find_by(attrs).nil? }
+    assert { PostLike.find_by(attrs, post_id: posts(:one).id) }
   end
 
   test 'test delete' do

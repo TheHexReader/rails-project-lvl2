@@ -1,17 +1,17 @@
-- comments.each do |comment|
+- comments.each do |comment, children|
   .m-4
     hr.my-2
         .mr-auto
           span.me-1
-            = PostComment.find_by(id: comment).user
+            = comment.user.email
           p.mr-2
-            = PostComment.find_by(id: comment).content
-          - if PostComment.find_by(id: comment).user == (user_signed_in? ? '' : current_user.email)
-            = link_to t('delete'), post_comment_path(comment, post_id: @post), method: :delete, class: 'btn btn-danger'
-          - if PostComment.find_by(id: comment).has_children?
-            = render 'posts/comments/children_comments', comments: PostComment.find_by(id: comment).child_ids
+            = comment.content
+          - if comment.user == (user_signed_in? ? current_user.email : '')
+            = link_to t('delete'), post_comment_path(comment.id, post_id: @post), method: :delete, class: 'btn btn-danger'
+          - if comment.has_children?
+            = render 'posts/comments/children_comments', comments: children
     hr.my-2
     .mb-2.m-4
-      = link_to t('answer'), "#new_post_comment_#{comment}", class: 'd-block small text-muted', 'data-bs-toggle': 'collapse'
-      .collapse id="new_post_comment_#{comment}" data-bs-target="#new_post_comment_#{comment}"
-        = render 'posts/comments/form', post: @post, comment: comment
+      = link_to t('answer'), "#new_post_comment_#{comment.id}", class: 'd-block small text-muted', 'data-bs-toggle': 'collapse'
+      .collapse id="new_post_comment_#{comment.id}" data-bs-target="#new_post_comment_#{comment.id}"
+        = render 'posts/comments/form', post: @post, comment:

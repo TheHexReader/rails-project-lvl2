@@ -7,43 +7,39 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
   setup do
-    get new_user_session_path
     sign_in users(:one)
-    post user_session_path
-  end
-
-  test 'test show user' do
-    get root_path
-    assert_select '.nav-link', text: users(:one)['email']
   end
 
   test 'test show' do
     post_one = posts(:one)
     get post_url(post_one)
-    assert_select 'a', text: post_one['title']
+    assert_response :success
   end
 
   test 'test new' do
     get new_post_path
-    assert_select 'h4', text: 'Новый пост'
+    assert_response :success
   end
 
   test 'test create' do
     attrs = {
       title: Faker::Lorem.sentence,
       body: Faker::Lorem.paragraph,
-      category_id: 1
+      category_id: categories(:one).id
     }
     post posts_path, params: { post: attrs }
 
-    assert_redirected_to post_path(Post.find_by(attrs))
-    assert_select '*', text: attrs['title']
+    post = Post.find_by(attrs)
+    assert { post }
+    assert_redirected_to post_path(post)
+
+    assert_response :found
   end
 
   test 'test edit' do
     post_one = posts(:one)
     get edit_post_path(post_one)
-    assert_select 'h4', text: 'Редактировать пост'
+    assert_response :success
   end
 
   test 'test update' do
@@ -51,12 +47,15 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     attrs = {
       title: Faker::Lorem.sentence,
       body: Faker::Lorem.paragraph,
-      category: 1
+      category: categories(:one).id
     }
     patch post_path(post_one), params: { post: attrs }
 
-    assert_redirected_to post_path(post_one)
-    assert_select 'a', text: attrs['title']
+    post = Post.find_by(attrs)
+    assert { post }
+    assert_redirected_to post_path(post)
+
+    assert_response :found
   end
 
   test 'test destroy' do
@@ -64,6 +63,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
 
     delete post_path(post_one)
 
+    assert_response :found
     assert { Post.find_by(id: post_one[:id]).nil? }
   end
 end

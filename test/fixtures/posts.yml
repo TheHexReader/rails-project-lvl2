@@ -1,6 +1,11 @@
 one:
-  id: 1
   title: 'Post One'
   body: 'Body of a post one'
-  category_id: 1
-  creator_id: 1
+  category: one
+  creator: one
+
+two:
+  title: 'Post Two'
+  body: 'Body of a post two'
+  category: one
+  creator: two

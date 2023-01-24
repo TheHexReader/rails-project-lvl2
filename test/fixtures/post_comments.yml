@@ -1,5 +1,4 @@
 one:
-  id: 1
   content: Some comments for this comment
-  user_id: 1
-  post_id: 1
+  user: one
+  post: one

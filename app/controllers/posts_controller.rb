@@ -3,7 +3,6 @@
 # Post controller
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: %i[create new edit update destroy]
-  skip_before_action :verify_authenticity_token
 
   def show
     @post = Post.includes(:category).find(params[:id])

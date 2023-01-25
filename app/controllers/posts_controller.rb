@@ -8,7 +8,9 @@ class PostsController < ApplicationController
     @post = Post.includes(:category).find(params[:id])
     @comments = @post.comments.includes(:user).arrange
     @likes = @post.likes
-    @like = @likes.find_by(user: current_user[:id])
+    if user_signed_in?
+      @like = @likes.find_by(user: current_user[:id])
+    end
   end
 
   def create

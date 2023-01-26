@@ -45,8 +45,9 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   # На Heroku нельзя использовать в приложениях sqlite
-  gem 'sqlite3', '~> 1.4'
 end
+
+gem 'sqlite3', '~> 1.4'
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
@@ -72,7 +73,7 @@ end
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 group :production do
-  gem 'pg'
+  # gem 'pg'
 end
 
 gem 'net-pop', '~> 0.1.2'

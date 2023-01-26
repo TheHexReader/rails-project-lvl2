@@ -27,3 +27,6 @@ bin/rails db:seed
 
 ## Ссылка на Railway
 https://rails-project-lvl2-production.up.railway.app
+
+## Ссылка на Render
+https://rails-project-lvl2.onrender.com

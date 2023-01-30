@@ -19,7 +19,7 @@ module Posts
     end
 
     def destroy
-      @like = PostLike.find(params[:id])
+      @like = current_user.likes.find(params[:id])
 
       if @like.delete
         redirect_to post_path(params[:post_id]), notice: t('success')

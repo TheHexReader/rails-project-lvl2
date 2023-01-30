@@ -9,7 +9,7 @@
             | #{post['body']}
           .text-right.small.text-muted.mt-auto
             span.me-2
-              | #{t('like_counter', likes: post.likes.count)}
+              | #{t('like_counter', likes: post.likes.size)}
             span.me-2 |
             span.me-2
               | #{t('minutes_ago', time: time_ago_in_words(post.created_at))}

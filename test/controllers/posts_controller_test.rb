@@ -4,7 +4,6 @@ require 'test_helper'
 
 # Users controler tests
 class PostsControllerTest < ActionDispatch::IntegrationTest
-  include Devise::Test::IntegrationHelpers
 
   setup do
     sign_in users(:one)

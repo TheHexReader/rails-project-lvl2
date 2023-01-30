@@ -3,6 +3,6 @@
 # Home controller
 class HomeController < ApplicationController
   def index
-    @posts = Post.all.order(created_at: :desc)
+    @posts = Post.includes(:category).all.order(created_at: :desc)
   end
 end

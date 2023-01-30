@@ -1,6 +1,6 @@
 = simple_form_for 'post_comment', url: post_comments_path(post) do |f|
   = f.error_notification
-  - unless comment.nil?
+  - if comment
     = f.input :parent_id, as: :hidden, input_html: { value: comment.id }
   .form-group
     = f.label t('comment_label')

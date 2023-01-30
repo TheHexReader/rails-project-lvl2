@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, only: %i[create new edit update destroy]
 
   def show
-    @post = Post.includes(:category).find(params[:id])
+    @post = Post.find(params[:id])
     @comments = @post.comments.includes(:user).arrange
     @likes = @post.likes
     @like = @likes.find_by(user: current_user[:id]) if user_signed_in?
@@ -19,7 +19,7 @@ class PostsController < ApplicationController
       flash[:notice] = t('post_created')
     else
       render :new
-      flash[:notice] = t('cant_create_post') if @post.category_id.nil?
+      flash[:notice] = t('cant_create_post')
     end
   end
 
@@ -28,11 +28,7 @@ class PostsController < ApplicationController
   end
 
   def edit
-    if current_user.posts.find(params[:id]).creator_id == current_user.id
-      @post = Post.find params[:id]
-    else
-      redirect_to root_path
-    end
+    @post = Post.find(params[:id])
   end
 
   def update

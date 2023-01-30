@@ -6,8 +6,6 @@
             = comment.user.email
           p.mr-2
             = comment.content
-          - if comment.user == (user_signed_in? ? current_user.email : '')
-            = link_to t('delete'), post_comment_path(comment.id, post_id: @post), method: :delete, class: 'btn btn-danger'
           - if comment.has_children?
             = render 'posts/comments/children_comments', comments: children
     hr.my-2

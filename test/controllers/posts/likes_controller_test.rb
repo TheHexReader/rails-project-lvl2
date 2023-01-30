@@ -4,7 +4,6 @@ require 'test_helper'
 
 # Likes controler tests
 class LikesControllerTest < ActionDispatch::IntegrationTest
-
   setup do
     sign_in users(:one)
   end
@@ -12,7 +11,7 @@ class LikesControllerTest < ActionDispatch::IntegrationTest
   test 'test create' do
     post post_likes_path(posts(:two))
 
-    assert { PostLike.find_by( post_id: posts(:two).id, user: users(:one)) }
+    assert { PostLike.find_by(post_id: posts(:two).id, user: users(:one)) }
     assert_redirected_to post_path(posts(:two))
   end
 

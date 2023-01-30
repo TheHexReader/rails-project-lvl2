@@ -4,7 +4,6 @@ require 'test_helper'
 
 # Users controler tests
 class PostsControllerTest < ActionDispatch::IntegrationTest
-
   setup do
     sign_in users(:one)
   end
